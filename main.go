@@ -16,17 +16,18 @@ func get(w http.ResponseWriter, r *http.Request) {
 }
 
 
-type Data struct {
-    x_data string
-    y_data  string
+type data_struct struct {
+    X_data []int
+    Y_data []int
 }
 
 func post(w http.ResponseWriter, r *http.Request) {
     
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusCreated)
-
-    var d Data
+    r.ParseForm()
+    log.Println(r.Form)
+    var d data_struct
 
     // Try to decode the request body into the struct. If there is an error,
     // respond to the client with the error message and a 400 status code.
@@ -35,17 +36,8 @@ func post(w http.ResponseWriter, r *http.Request) {
         http.Error(w, err.Error(), http.StatusBadRequest)
         return
     }
-
-    // Do something with the Person struct...
-    fmt.Fprintf(w, "Person: %+v", d)
-    fmt.Printf(d.x_data)
-
-
-
-    for k, v := range r.URL.Query() {
-        fmt.Printf("%s: %s\n", k, v)
-    }
-    
+    fmt.Printf("%v", d.X_data)
+    fmt.Printf("%v", d.Y_data)
 
 
     w.Write([]byte(`{"message": "post called"}`))
