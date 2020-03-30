@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-
 	"github.com/gorilla/mux"
 )
 
@@ -13,6 +12,8 @@ func get(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+
+//struct form of post object
 type data_struct struct {
 	X_data []int
 	Y_data []int
@@ -25,7 +26,6 @@ func post(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	log.Println(r.Form)
 	var d data_struct
-
 	// Try to decode the request body into the struct. If there is an error,
 	// respond to the client with the error message and a 400 status code.
 	err := json.NewDecoder(r.Body).Decode(&d)
@@ -37,15 +37,18 @@ func post(w http.ResponseWriter, r *http.Request) {
 	if len(d.X_data) == 0 {
 		http.Error(w, "please provide x_data", http.StatusBadRequest)
 		return
-
 	}
+
 	// Error if provided y_data array contains no values
 	if len(d.Y_data) == 0 {
 		http.Error(w, "please provide y_data", http.StatusBadRequest)
 		return
-
 	}
-	var svm = NewLinearSVC("l2", "l2", true, 1.0, 0.2)(*LinearSVC, error)
+
+	
+
+
+	//var svm = NewLinearSVC("l2", "l2", true, 1.0, 0.2)(*LinearSVC, error)
 
 	w.Write([]byte(`{"message": "post called"}`))
 }
@@ -69,5 +72,5 @@ func main() {
 	api.HandleFunc("", put).Methods(http.MethodPut)
 	api.HandleFunc("", delete).Methods(http.MethodDelete)
 
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":5550", r))
 }
