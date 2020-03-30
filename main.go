@@ -45,23 +45,46 @@ func post(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	
-
-
 	//var svm = NewLinearSVC("l2", "l2", true, 1.0, 0.2)(*LinearSVC, error)
 
 	w.Write([]byte(`{"message": "post called"}`))
 }
+
+
+
 
 func put(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
 	return
 }
 
+
 func delete(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, http.StatusText(405), http.StatusMethodNotAllowed)
 	return
 }
+
+
+
+
+func svm(x []int,y []int){
+	
+
+
+	//check if both x and y have same length
+	if len(x) != len(y) {
+		panic(err)
+	}
+
+
+}
+
+
+
+
+
+
+
 
 func main() {
 	r := mux.NewRouter()
