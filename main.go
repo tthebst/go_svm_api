@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
+	"gonum.org/v1/gonum/stat/distuv"
 )
 
 func get(w http.ResponseWriter, r *http.Request) {
@@ -66,20 +67,29 @@ func delete(w http.ResponseWriter, r *http.Request) {
 
 
 
+// blackscholes calculates option prices
+// Arguments:
+// float t -> time to maturity
+// float s -> spot price of underlying asset
+// float k -> strike price
+// float r -> risk free rate
+// float s -> volatility of underlying asset
+// Returns:
+// float c -> call price
+func blackscholes(t float64,s float64, k float64, r float64,s float64){
+	distuv.
 
-func svm(x []int,y []int){
-	
-
-
-	//check if both x and y have same length
-	if len(x) != len(y) {
-		panic(err)
-	}
 
 
 }
 
 
+// Comulative distritbution function of normal distribution
+func norm_dist_cdf(x float64){
+
+
+
+}
 
 
 
